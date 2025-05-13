@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="GourmetCoffee" default="compile">
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="build"/>
+    <property name="classes.dir" value="${build.dir}/classes"/>
+    <property name="data.dir" value="data"/>
+    
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+    
+    <target name="init">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${build.dir}/data"/>
+        <copy todir="${build.dir}/data">
+            <fileset dir="${data.dir}"/>
+        </copy>
+    </target>
+    
+    <target name="compile" depends="init">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeantruntime="false"/>
+    </target>
+    
+    <target name="run" depends="compile">
+        <java classname="src.GourmetCoffee" classpath="${classes.dir}">
+            <classpath>
+                <pathelement location="${classes.dir}"/>
+            </classpath>
+        </java>
+    </target>
+</project> 
